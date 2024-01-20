@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.santanderbr.contas.entity.Address;
-import com.santanderbr.contas.entity.Client;
+import com.santanderbr.contas.entities.Address;
+import com.santanderbr.contas.entities.Client;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
