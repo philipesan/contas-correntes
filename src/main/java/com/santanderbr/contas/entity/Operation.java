@@ -33,7 +33,7 @@ import lombok.Setter;
 public class Operation {
 	@Id
 	@GeneratedValue
-	private String id;
+	private Long id;
 	private Integer operationLine;
     private BigDecimal amount;
     private Boolean notificationFlag;

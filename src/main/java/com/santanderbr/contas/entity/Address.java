@@ -28,7 +28,7 @@ import lombok.Setter;
 public class Address {
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Long id;
 	private String zipCode;
 	private String streetName;
 	private String number;

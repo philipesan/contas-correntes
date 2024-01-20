@@ -27,7 +27,7 @@ public class Client {
 	
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Long id;
 	private String password;
     @ManyToOne
     @JoinColumn(columnDefinition="integer", name = "fk_address")

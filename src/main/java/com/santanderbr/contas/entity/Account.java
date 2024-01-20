@@ -30,7 +30,7 @@ import lombok.Setter;
 public class Account {
 	@Id
 	@GeneratedValue
-	private String id;
+	private Long id;
 	private String branch;
 	private BigDecimal balance;
 	private Boolean status;
