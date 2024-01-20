@@ -34,7 +34,7 @@ import lombok.Setter;
 public class Transaction {
 	@Id
 	@GeneratedValue
-	private String id;
+	private Long id;
     private LocalDate transactionDate;
     
     @OneToOne
