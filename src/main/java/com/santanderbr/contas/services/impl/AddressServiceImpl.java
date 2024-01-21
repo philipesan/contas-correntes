@@ -38,12 +38,12 @@ public class AddressServiceImpl implements AddressService {
 			pageable = PageRequest.of(page, items, Sort.by(sort).descending());
 		}
 		
-		Page<Address> search;
+		Page<AddressResponseDTO> search;
 		
 		if(status.equals(3)) {
-			search = addressRepository.findAll(pageable);
+			search = addressRepository.findAll(pageable).map(addressMapper::toResponseDto);
 		} else {
-			search = addressRepository.findAllByStatus(status, pageable);			
+			search = addressRepository.findAllByStatus(status, pageable).map(addressMapper::toResponseDto);			
 		}
 		
 		ApiResponseDTO apiResponse = new ApiResponseDTO();
@@ -53,10 +53,20 @@ public class AddressServiceImpl implements AddressService {
 	}
 	
 	@Override
-	public ResponseEntity<ApiResponseDTO> getAddress(Long idAddress) {
+	public ResponseEntity<ApiResponseDTO> getAddress(String param, String value) {
 		AddressResponseDTO response = new AddressResponseDTO();
 		ApiResponseDTO apiResponse = new ApiResponseDTO();
-		Optional<Address> address = addressRepository.findById(idAddress);
+		Optional<Address> address;
+		
+		if(param.equals("id")) {
+			Long id = Long.valueOf(value);
+			address = addressRepository.findById(id);
+		} else if(param.equals("zipCode")) {
+			address = addressRepository.findByZipCode(value);
+		} else {
+			apiResponse.setMessage("Invalid request Parameter: " + param);
+			return ResponseEntity.status(422).body(apiResponse);
+		}
 		
 		if(address.isEmpty()) {
 			apiResponse.setMessage("Address not found");
@@ -137,7 +147,7 @@ public class AddressServiceImpl implements AddressService {
 		try {
 			newAddress = addressRepository.save(newAddress);
 			response = addressMapper.toResponseDto(newAddress);
-			apiResponse.setMessage("Address Updated !");
+			apiResponse.setMessage("Address Updated!");
 			apiResponse.setContent(response);
 			log.info("Entry updated: " + response.getId());
 			return ResponseEntity.status(201).body(apiResponse);

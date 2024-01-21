@@ -32,9 +32,11 @@ public class AddressController {
 		return addressService.listAddress(page, items, sort, direction, status);
 	}
 	
-	@GetMapping(path="/{idAddress}")
-	public ResponseEntity<ApiResponseDTO> getAddress(@PathVariable Long idAddress) {
-		return addressService.getAddress(idAddress);
+	@GetMapping(path="/search")
+	public ResponseEntity<ApiResponseDTO> getAddress(
+			@RequestParam(defaultValue = "id") String param,
+    		@RequestParam(defaultValue = "0") String value) {
+		return addressService.getAddress(param, value);
 		
 	}
 	

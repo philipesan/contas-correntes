@@ -14,8 +14,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClientResponseDTO {
-	private String message;
 	private Long id;
 	private String name;
+	private Integer status;
+	private String document;
+	private String type;
 	private Address address;
 }

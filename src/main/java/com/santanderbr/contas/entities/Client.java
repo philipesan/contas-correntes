@@ -31,7 +31,10 @@ public class Client {
 	@GeneratedValue
 	private Long id;
 	private String name;
+	private String document;
+	private String type;
 	private String password;
+	private Integer status;
     @ManyToOne
     @JoinColumn(columnDefinition="integer", name = "fk_address")
 	private Address address;

@@ -9,8 +9,8 @@ import com.santanderbr.contas.dto.responses.ApiResponseDTO;
 
 @Service
 public interface AddressService {
-	ResponseEntity<ApiResponseDTO> getAddress(Long idAddress);
 	ResponseEntity<ApiResponseDTO> createAddress(AddressRequestDTO address);
 	ResponseEntity<ApiResponseDTO> updateAddress(AddressRequestDTO address, Long idAddress);
 	ResponseEntity<ApiResponseDTO> listAddress(Integer page, Integer items, String sort, String direction, Integer status);
+	ResponseEntity<ApiResponseDTO> getAddress(String param, String value);
 }
