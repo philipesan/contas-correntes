@@ -34,7 +34,7 @@ public class Account {
 	private Long id;
 	private String branch;
 	private BigDecimal balance;
-	private Boolean status;
+	private Integer status;
     @ManyToOne
     @JoinColumn(columnDefinition="integer", name = "fk_client")
 	private Client accountHolder;

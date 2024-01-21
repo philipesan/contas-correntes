@@ -145,9 +145,15 @@ public class ClientServiceImpl implements ClientService {
 			log.warn("Invalid Document");
 			return ResponseEntity.status(422).body(apiResponse);
 		} 
+	
+		Optional<Client> validateClient = clientRepository.findById(idClient);
+		if(validateClient.isEmpty()) {
+			log.warn("Client: " + idClient + " not found");
+			apiResponse.setMessage("Client could not be found");
+			return ResponseEntity.status(422).body(apiResponse);
+		}		
 		
 		Optional<Address> address = this.locateAddress(client.getAddressId());
-		
 		if(address.isEmpty()) {
 			log.warn("Address: " + client.getAddressId() + " not found");
 			apiResponse.setMessage("Address could not be found");

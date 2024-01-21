@@ -37,8 +37,8 @@ public class Operation {
     private LocalDate notificationDate;
     
     @ManyToOne
-    @JoinColumn(columnDefinition="integer", name = "fk_client")
-	private Client client;
+    @JoinColumn(columnDefinition="integer", name = "fk_account")
+	private Account account;
 
     
 

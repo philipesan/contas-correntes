@@ -75,7 +75,7 @@ public class AddressServiceImpl implements AddressService {
 		
 		response = addressMapper.toResponseDto(address.get());
 		apiResponse.setMessage("Address Found!");
-		apiResponse.setContent(address);
+		apiResponse.setContent(response);
 		return ResponseEntity.status(200).body(apiResponse);
 	}
 
