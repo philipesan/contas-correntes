@@ -1,19 +1,16 @@
-package com.santanderbr.contas.entity;
+package com.santanderbr.contas.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import org.springframework.data.annotation.Id;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,7 +36,7 @@ public class Operation {
     private Boolean notificationFlag;
     private LocalDate notificationDate;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(columnDefinition="integer", name = "fk_client")
 	private Client client;
 
