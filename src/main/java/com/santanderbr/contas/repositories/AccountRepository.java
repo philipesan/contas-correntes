@@ -14,7 +14,7 @@ import com.santanderbr.contas.entities.Client;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 	Optional<Account> findById(Long id);
-	List<Account> findByAccountHolder(Client client);
+	List<Account> findAllByAccountHolderId(final Long clientId);
 	Page<Account> findAllByStatus(Pageable pageable, Integer status);
 	
 }

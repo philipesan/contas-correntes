@@ -1,9 +1,9 @@
 package com.santanderbr.contas.dto.responses;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.santanderbr.contas.entities.Client;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,11 +15,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AccountResponseDTO {
+public class OperationResponseDTO {
+	
 	private Long id;
-	private Long accountNumber;
-	private String branch;
-	private BigDecimal balance;
-	private Integer status;
-	private ClientResponseDTO accountHolder;
+	private Integer operationLine;
+    private BigDecimal amount;
+    private Boolean notificationFlag;
+    private LocalDate notificationDate;
+    private LocalDate operationDate;
+	private AccountResponseDTO account;
+    private Integer status;
+
 }

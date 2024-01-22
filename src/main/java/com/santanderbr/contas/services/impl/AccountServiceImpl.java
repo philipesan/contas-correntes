@@ -1,7 +1,9 @@
 package com.santanderbr.contas.services.impl;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,20 +34,42 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired ClientRepository clientRepository;
 
 	@Override
-	public ResponseEntity<ApiResponseDTO> getAccount(Long idAccount) {
-		AccountResponseDTO response = new AccountResponseDTO();
+	public ResponseEntity<ApiResponseDTO> getAccount(String param, String value) {
+
 		ApiResponseDTO apiResponse = new ApiResponseDTO();
-		Optional<Account> account = accountRepository.findById(idAccount);
 		
-		if(account.isEmpty()) {
-			apiResponse.setMessage("Account not found");
+		if(param.equals("id")) {
+			Optional<Account> account;
+			Long id = Long.valueOf(value);
+			account = accountRepository.findById(id);
+			
+			if(account.isEmpty()) {
+				apiResponse.setMessage("Account not found");
+				return ResponseEntity.status(422).body(apiResponse);
+			} 
+			
+			apiResponse.setContent(accountMapper.toResponseDto(account.get()));
+
+		} else if(param.equals("holder")) {
+			List<Account> account;
+			account = accountRepository.findAllByAccountHolderId(Long.valueOf(value));
+			
+			if(account.isEmpty()) {
+				apiResponse.setMessage("Client not found");
+				return ResponseEntity.status(422).body(apiResponse);
+			} 
+			
+			apiResponse.setContent(account.stream()
+					  .map(accountMapper::toResponseDto)
+					  .collect(Collectors.toList()));
+		
+		} else {
+			apiResponse.setMessage("Invalid request Parameter: " + param);
 			return ResponseEntity.status(422).body(apiResponse);
-		} 
-		
-		response = accountMapper.toResponseDto(account.get());
-		apiResponse.setMessage("Account Found!");
-		apiResponse.setContent(response);
-		return ResponseEntity.status(200).body(apiResponse);
+		}
+
+		apiResponse.setMessage("Client found!");
+		return ResponseEntity.status(200).body(apiResponse);	
 	}
 
 	@Override

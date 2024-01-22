@@ -14,10 +14,10 @@ public interface AccountService {
 	ResponseEntity<ApiResponseDTO> listAccount(Integer page, Integer items, String sort, String direction,
 			Integer status);
 
-	ResponseEntity<ApiResponseDTO> createAccount(@Valid AccountRequestDTO account);
+	ResponseEntity<ApiResponseDTO> createAccount(AccountRequestDTO account);
 
-	ResponseEntity<ApiResponseDTO> updateAccount(@Valid AccountRequestDTO account, Long idAccount);
+	ResponseEntity<ApiResponseDTO> updateAccount(AccountRequestDTO account, Long idAccount);
 
-	ResponseEntity<ApiResponseDTO> getAccount(Long idAccount);
+	ResponseEntity<ApiResponseDTO> getAccount(String param, String value);
 
 }

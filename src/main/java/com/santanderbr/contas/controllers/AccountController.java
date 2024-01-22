@@ -23,10 +23,11 @@ public class AccountController {
 	@Autowired
 	AccountService accountService;
 	
-	@GetMapping(path="/search/{idAccount}")
+	@GetMapping(path="/search")
 	public ResponseEntity<ApiResponseDTO> getAccount(    		
-			@PathVariable Long idAccount) {
-		return accountService.getAccount(idAccount);
+			@RequestParam(defaultValue = "id") String param,
+    		@RequestParam(defaultValue = "0") String value) {
+		return accountService.getAccount(param, value);
 	}
 	
 	@GetMapping(path="/list")
