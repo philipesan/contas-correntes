@@ -39,4 +39,7 @@ public class Client {
     @JoinColumn(columnDefinition="integer", name = "fk_address")
 	private Address address;
 	
+    public Boolean validateAddress() {
+    	return (address.getStatus().equals(0)) ? true : false;
+    }
 }

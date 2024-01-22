@@ -10,8 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,16 +34,12 @@ public class Transaction {
 	private Long id;
     private LocalDate transactionDate;
     
-    @OneToOne
-    @JoinColumn(columnDefinition="integer", name = "fk_client")
-	private Client client;
+    @ManyToOne
+    @JoinColumn(columnDefinition="integer", name = "fk_account")
+	private Account account;
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="fk_transac")
     private List<Operation> operations;
-
-    
-    
-	
 
 }
