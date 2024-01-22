@@ -139,6 +139,7 @@ public class OperationServiceImpl implements OperationService {
 	}
 	
     public ResponseEntity<String> executeRequest(String uri, HttpEntity<String> requestBody) {
+    	log.info("Consultando o serviço: " + uri);
     	ResponseEntity<String> response = this.restTemplate.postForEntity(uri, requestBody, String.class);
     	return response;
     }
